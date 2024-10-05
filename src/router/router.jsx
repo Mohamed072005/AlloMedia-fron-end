@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../views/HomePage";
 import RegisterPage from "../views/auth/RegisterPage";
 import ConfirmAccount from "../views/config/ConfirmAccount";
+import LoginPage from "../views/auth/LoginPage";
 
 export const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
     {
         path: '/confirm/account',
         element: <ConfirmAccount />,
+    },
+    {
+        path: '/login',
+        element: <LoginPage />,
     }
 ])
 

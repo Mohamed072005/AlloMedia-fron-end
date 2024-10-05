@@ -7,6 +7,7 @@ import FullNameField from "./FullNameField";
 import NickNameField from "./NickNameField";
 import PasswordField from "./PasswordField";
 import PhoneNumberField from "./PhoneNumberField";
+import {Link} from "react-router-dom";
 
 export default function MainComponent ({handelSubnitForm}) {
     return (
@@ -38,7 +39,7 @@ export default function MainComponent ({handelSubnitForm}) {
                     Create an account
                 </button>
                 <p className="text-sm font-light text-black dark:text-gray-400">
-                    Already have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
+                    Already have an account? <Link to={'/login'} className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                 </p>
             </form>
         </>
