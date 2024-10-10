@@ -7,29 +7,63 @@ import FullNameField from "./FullNameField";
 import NickNameField from "./NickNameField";
 import PasswordField from "./PasswordField";
 import PhoneNumberField from "./PhoneNumberField";
+import {Link} from "react-router-dom";
+import {OrbitProgress} from "react-loading-indicators";
 
-export default function MainComponent ({handelSubnitForm}) {
+export default function MainComponent ({handelSubnitForm, errors, loading}) {
     return (
         <>
-            <form className="space-y-4 md:space-y-6" onSubmit={(event)=>handelSubnitForm(event)}>
+            {loading &&
+            <div className="absolute h-[150px] w-[370px] top-80 flex items-center justify-center">
+                <OrbitProgress dense color="#03045e" size="medium" text="" textColor="" />
+            </div>
+            }
+            <form className={`space-y-4 md:space-y-6 ${loading ? 'opacity-30' : ''}`} onSubmit={(event)=>handelSubnitForm(event)}>
                 <div className="flex gap-3">
-                    <FullNameField />
-                    <NickNameField />
+                    <div className="w-full">
+                        <FullNameField />
+                        {errors?.full_name && <span className="text-red-600">{errors.full_name}</span>}
+                    </div>
+                    <div className="w-full">
+                        <NickNameField />
+                        {errors?.user_name && <span className="text-red-600">{errors.user_name}</span>}
+                    </div>
                 </div>
                 <div className="flex gap-3">
-                    <EmailField />
-                    <PhoneNumberField />
+                    <div className="w-full">
+                        <EmailField />
+                        {errors?.email && <span className="text-red-600">{errors.email}</span>}
+                    </div>
+                    <div className="w-full">
+                        <PhoneNumberField />
+                        {errors?.phone_number && <span className="text-red-600">{errors.phone_number}</span>}
+                    </div>
                 </div>
                 <div className="flex gap-3">
-                    <PasswordField />
-                    <ConfirmePasswordField />
+                    <div className="w-full">
+                        <PasswordField />
+                        {errors?.password && <span className="text-red-600">{errors.password}</span>}
+                    </div>
+                    <div className="w-full">
+                        <ConfirmePasswordField />
+                        {errors?.confirme_password && <span className="text-red-600">{errors.confirme_password}</span>}
+                    </div>
                 </div>
                 <div className="flex gap-3">
-                    <CountryField />
-                    <CityField />
+                    <div className="w-full">
+                        <CountryField />
+                        {errors?.country && <span className="text-red-600">{errors.country}</span>}
+                    </div>
+                    <div className="w-full">
+                        <CityField />
+                        {errors?.city && <span className="text-red-600">{errors.city}</span>}
+                    </div>
                 </div>
                 <div className="flex gap-3">
-                    <AddressField />
+                    <div className="w-full">
+                        <AddressField />
+                        {errors?.address && <span className="text-red-600">{errors.address}</span>}
+                    </div>
                 </div>
                 <button 
                     type="submit" 
@@ -38,7 +72,7 @@ export default function MainComponent ({handelSubnitForm}) {
                     Create an account
                 </button>
                 <p className="text-sm font-light text-black dark:text-gray-400">
-                    Already have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
+                    Already have an account? <Link to={'/login'} className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</Link>
                 </p>
             </form>
         </>
