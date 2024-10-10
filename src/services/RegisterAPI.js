@@ -1,8 +1,8 @@
-import axios from "axios"
+import AxiosInstance from "./AxiosInstance.js";
 
 export const register = async (payload) => {
     try{        
-        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/register`, payload );
+        const response = await AxiosInstance.post(`/register`, payload );
         return response;
     }catch(err){
         throw err.response;

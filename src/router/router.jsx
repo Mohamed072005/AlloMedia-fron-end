@@ -3,6 +3,7 @@ import HomePage from "../views/HomePage";
 import RegisterPage from "../views/auth/RegisterPage";
 import ConfirmAccount from "../views/config/ConfirmAccount";
 import LoginPage from "../views/auth/LoginPage";
+import ConfirmOTP_API from "../views/config/OTP/ConfirmOTP_API.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -20,6 +21,22 @@ export const router = createBrowserRouter([
     {
         path: '/login',
         element: <LoginPage />,
+    },
+    {
+        path: '/confirm/one/time/password',
+        element: <ConfirmOTP_API />
+    },
+    {
+        path: '/auth',
+        children: [
+            {
+                path: '/auth/login',
+            },
+            {
+                path: '/auth/register',
+            },
+
+        ]
     }
 ])
 
