@@ -17,3 +17,12 @@ export const resendOTP = async (user_id) => {
         throw err;
     }
 }
+
+export const askForResetPasswordLink = async (identifier) => {
+    try{
+        const response = await AxiosInstance.post(`/ask/reset/password`, {identifier});
+        return response;
+    }catch (error) {
+        throw error;
+    }
+}

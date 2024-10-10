@@ -34,7 +34,7 @@ export default function MainComponent({errors, handelSubmitForm, loading}) {
                     here</Link>
                 </p>
                 <p className="text-sm font-light text-black dark:text-gray-400">
-                    Forgot password? <Link to={"/register"}
+                    Forgot password? <Link to={"/reset/password"}
                                              className="font-medium text-primary-600 hover:underline dark:text-primary-500">reset it here
                     here</Link>
                 </p>
