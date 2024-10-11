@@ -86,6 +86,7 @@ export default function ResetPassword({handelSubmitForm, errors, loading}) {
                     <div className="mt-8">
                         <button
                             onClick={() => window.history.back()}
+                            data-cy='previuse-page'
                             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
                         >
                             Go Back
