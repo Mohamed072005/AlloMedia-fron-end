@@ -12,6 +12,6 @@ RUN npm run build
 
 RUN npm install -g serve
 
-EXPOSE 3000
+EXPOSE 5173
 
-CMD ["serve", "-s", "dist"]
+CMD ["npm", "run", "preview"]
