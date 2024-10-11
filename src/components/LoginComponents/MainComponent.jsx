@@ -3,6 +3,7 @@ import IdentifierField from "./IdentifierField.jsx";
 import PasswordField from "./PasswordField.jsx";
 import {Link} from "react-router-dom";
 import {OrbitProgress} from "react-loading-indicators";
+import {removeLocalStorage} from "../../helpers/LocalStorageHelper.js";
 
 export default function MainComponent({errors, handelSubmitForm, loading}) {
     return (

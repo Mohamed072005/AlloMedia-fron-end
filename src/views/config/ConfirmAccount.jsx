@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import {removeLocalStorage} from "../../helpers/LocalStorageHelper.js";
 
 export default function ConfirmAccount(){
     const { registredUser, setRegistredUser } = useContext(UserContext);
@@ -8,11 +9,14 @@ export default function ConfirmAccount(){
 
     useEffect(() => {
         if (!registredUser){
-            navigate("/register");
+            // navigate("/register");
+            window.history.back()
         }
         setTimeout(() => {
             setRegistredUser(null);
-            navigate('/register');
+            removeLocalStorage("user_email");
+            window.history.back()
+            // navigate('/register');
         }, 180000)
     }, [registredUser]);
 
@@ -23,7 +27,7 @@ export default function ConfirmAccount(){
                 <h1 className="text-6xl font-light mb-8 text-white">Email Verification Required</h1>
                 <div className="mb-4 text-center">
                     <p className="text-xl text-gray-100 mb-4">
-                        Please verify your email address to complete your registration. Check your inbox <big className="font-semibold text-yellow-300">"{registredUser?.email}"</big> and click on
+                        Please verify your email address to complete your registration. Check your inbox <big className="font-semibold text-yellow-300">"{registredUser?.user_email}"</big> and click on
                         the confirmation link.
                         <span className="font-semibold text-yellow-300"> The link will expire in 2 minutes.</span>
                     </p>
@@ -37,11 +41,6 @@ export default function ConfirmAccount(){
                         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
                     >
                         Go Back
-                    </button>
-                    <button
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
-                    >
-                        Resend Email
                     </button>
                 </div>
                 <div className="mt-8">
