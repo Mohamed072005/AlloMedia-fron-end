@@ -3,13 +3,13 @@ import {useContext, useState} from "react";
 import toast from "react-hot-toast";
 import {login} from "../../services/LoginAPI.js";
 import {useNavigate} from "react-router-dom";
-import {UserContext} from "../../context/UserContext.jsx";
+// import {UserContext} from "../../context/UserContext.jsx";
 import {setLocalStorage} from "../../helpers/LocalStorageHelper.js";
 
 export default function LoginAPI () {
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-    const { setLoggedUser } = useContext(UserContext);
+    // const { setLoggedUser } = useContext(UserContext);
     const navigate = useNavigate();
     const validateForm = (payload) => {
         let errors = {};
@@ -33,7 +33,8 @@ export default function LoginAPI () {
         }
         try{
             const response = await login(payload);
-            if(response.status === 200){
+            if(response.status === 200 && response.data.isLogged){
+
                 setLocalStorage("token", response.data.response.token);
                 toast.success(response.data.response.message);
                 setLoading(false);
@@ -41,15 +42,20 @@ export default function LoginAPI () {
                     navigate('/');
                 }, 2000);
             }
+            if (response.status === 200 &&  !response.data.isLogged){
+                toast.success(response.data.message);
+                setLocalStorage("user_email", response.data.user_email);
+                setLoading(false);
+                setTimeout(() => {
+                    navigate('/confirm/account');
+                },2000)
+            }
             if (response.status === 202){
                 toast.success(response.data.response.message);
-                setLoggedUser({
-                    user_id: response.data.response.user._id,
-                    email: response.data.response.user.email,
-                })
                 setLocalStorage("token", response.data.response.token)
-                setLocalStorage("user_id", response.data.response.user._id)
+                setLocalStorage("user_id", response.data.response.user_id)
                 setLoading(false)
+
                 setTimeout(() => {
                     navigate('/confirm/one/time/password');
                 }, 2000);

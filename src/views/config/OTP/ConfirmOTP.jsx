@@ -1,4 +1,45 @@
+import {useEffect, useState} from "react";
+import {getLocalStorage, removeLocalStorage, setLocalStorage} from "../../../helpers/LocalStorageHelper.js";
+
 export default function confirmOTP({ handelSubmitForm, errors, resendOTPCode }) {
+    const [isDisabledButton, setIsDisabledButton] = useState(false);
+    const [countDown, setCountDown] = useState(0);
+
+    const handelResendOTP = async () => {
+        resendOTPCode();
+
+        const expirationTime = Date.now() + 300000;
+        setLocalStorage("resetCountdownOTP", expirationTime);
+        setIsDisabledButton(true);
+        setCountDown(300);
+    }
+    useEffect(() => {
+        const storedExpirationTime = getLocalStorage("resetCountdownOTP");
+        if(storedExpirationTime){
+            const timeRemaining = Math.floor((storedExpirationTime - Date.now()) / 1000);
+            if (timeRemaining > 0) {
+                setIsDisabledButton(true);
+                setCountDown(timeRemaining);
+            }else {
+                removeLocalStorage("resetCountdownOTP");
+            }
+        }
+        let timer;
+        if (countDown > 0) {
+            timer = setTimeout(() => {
+                setCountDown(countDown - 1);
+            }, 1000)
+        }else {
+            setIsDisabledButton(false);
+        }
+        return () => clearTimeout(timer);
+    }, [countDown, isDisabledButton]);
+
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    };
     return (
         <>
             <section
@@ -54,11 +95,15 @@ export default function confirmOTP({ handelSubmitForm, errors, resendOTPCode }) 
                                     <p className="text-sm font-light text-black dark:text-gray-400">
                                         Resend the email?
                                         <button
-                                        onClick={() => resendOTPCode()}
-                                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                        type={"button"}
-                                    >send
-                                    </button>
+                                            onClick={handelResendOTP}
+                                            className={`font-medium text-primary-600 hover:underline dark:text-primary-500 ${
+                                                isDisabledButton ? 'cursor-not-allowed text-gray-400' : ''
+                                            }`}
+                                            type="button"
+                                            disabled={isDisabledButton}
+                                        >
+                                            {isDisabledButton ? `Wait for ${formatTime(countDown)}` : "Send"}
+                                        </button>
                                     </p>
                                 </div>
                             </form>

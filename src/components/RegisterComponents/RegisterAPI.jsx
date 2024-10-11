@@ -4,8 +4,9 @@ import  toast  from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {useContext, useState} from "react";
 import { UserContext } from "../../context/UserContext";
+import {setLocalStorage} from "../../helpers/LocalStorageHelper.js";
 
-export default function LoginAPI() {
+export default function RegisterAPI() {
     const { setRegistredUser } = useContext(UserContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -63,10 +64,11 @@ export default function LoginAPI() {
             const response = await register(payload);
             if(response.status === 200){
                 toast.success(response.data.message);
-                setRegistredUser({
-                    user_id: response.data.user._id,
-                    email: response.data.user.email,
-                })
+                // setRegistredUser({
+                //     user_id: response.data.user._id,
+                //     email: response.data.user.email,
+                // })
+                setLocalStorage("user_email", response.data.user.email);
                 setIsLoading(false)
                 navigate('/confirm/account');
             }

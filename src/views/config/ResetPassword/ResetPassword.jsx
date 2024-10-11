@@ -11,22 +11,22 @@ export default function ResetPassword({handelSubmitForm, errors, loading}) {
         const result = await handelSubmitForm(e);
         console.log(result);
         if (result) {
-            const expirationTime =  Date.now() + 300000;
-            setLocalStorage("resetCountdown",  expirationTime);
+            const expirationTime =  Date.now() + 600000;
+            setLocalStorage("resetCountdownRP",  expirationTime);
             setIsButtonDisabled(true);
-            setCountDown(300);
+            setCountDown(600);
         }
     }
 
     useEffect(() => {
-        const storedExpirationTime =  getLocalStorage("resetCountdown");
+        const storedExpirationTime =  getLocalStorage("resetCountdownRP");
         if(storedExpirationTime){
             const timeRemaining = Math.floor((storedExpirationTime - Date.now()) / 1000);
             if (timeRemaining > 0) {
                 setIsButtonDisabled(true);
                 setCountDown(timeRemaining);
             }else {
-                removeLocalStorage("resetCountdown");
+                removeLocalStorage("resetCountdownRP");
             }
         }
         let timer;
@@ -48,7 +48,7 @@ export default function ResetPassword({handelSubmitForm, errors, loading}) {
     return (
         <>
             <section
-                className={`relative ${loading ? 'opacity-80' : ''} bg-gradient-to-r from-[#00b4d8] to-[#0077b6] min-h-screen flex flex-col items-center justify-center`}>
+                className={`relative ${loading ? 'opacity-80' : ''} bg-gradient-to-r from-[#0096c7] to-[#023e8a] min-h-screen flex flex-col items-center justify-center`}>
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
                     {loading &&
                         <div className="absolute h-[150px] w-[420px] top-80 flex items-center justify-center">
