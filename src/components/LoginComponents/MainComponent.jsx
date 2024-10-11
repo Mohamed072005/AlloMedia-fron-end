@@ -31,11 +31,13 @@ export default function MainComponent({errors, handelSubmitForm, loading}) {
                 </button>
                 <p className="text-sm font-light text-black dark:text-gray-400">
                     Create an account? <Link to={"/register"}
+                                            data-cy='register'
                                              className="font-medium text-primary-600 hover:underline dark:text-primary-500">Register
                     here</Link>
                 </p>
                 <p className="text-sm font-light text-black dark:text-gray-400">
                     Forgot password? <Link to={"/reset/password"}
+                                            data-cy='reset-password'
                                              className="font-medium text-primary-600 hover:underline dark:text-primary-500">reset it here
                     here</Link>
                 </p>
