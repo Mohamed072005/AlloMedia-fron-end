@@ -1,5 +1,5 @@
 import MainComponent from "./MainComponent";
-import { register } from "../../services/RegisterAPI.js";
+import { register } from "../../services/authAPI.js";
 import  toast  from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {useContext, useState} from "react";
@@ -73,19 +73,19 @@ export default function RegisterAPI() {
                 navigate('/confirm/account');
             }
         }catch(err){
+            setIsLoading(false)                       
             if(err.status === 401){
-                toast.error(err.data.error)
-            }
-            if(err.status === 409){
                 toast.error(err.data.message)
             }
+            // if(err.status === 409){
+            //     toast.error(err.data.message)
+            // }
             if(err.status === 400){
                 toast.error(err.data.error)
             }
             if(err.status === 500){
                 toast.error('server error!');
             }
-            setIsLoading(false)
         }
     }
     return (
