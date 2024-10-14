@@ -5,7 +5,6 @@ import {removeLocalStorage} from "../../helpers/LocalStorageHelper.js";
 
 export default function ConfirmAccount(){
     const { registredUser, setRegistredUser } = useContext(UserContext);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (!registredUser){
