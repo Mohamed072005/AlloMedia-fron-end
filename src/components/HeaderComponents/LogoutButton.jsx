@@ -3,13 +3,11 @@ import { logout } from "../../services/authAPI";
 import toast from "react-hot-toast";
 import { removeLocalStorage } from "../../helpers/LocalStorageHelper";
 
-
 export default function LogoutButton() {
     const navigate = useNavigate();
     const Logout = async () => {
         try{
             const response = await logout();
-            console.log(response);
             if(response.status === 200){
                 removeLocalStorage('token');
                 setTimeout(() => {
