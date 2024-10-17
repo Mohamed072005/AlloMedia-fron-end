@@ -8,6 +8,3 @@ header h1 {
   font-family: 'Brush Script MT', cursive !important;
 }
 
-::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar */
-}

@@ -4,7 +4,7 @@ import ChatBox from "./ChatBox";
 export default function MainComponent() {
     return (
         <>
-            <div className="mt-5">
+            <div className="">
                 <div className="bg-[#191e3a] w-full rounded-lg chat-system">
                     <div className="p-3">
                         <Contact />

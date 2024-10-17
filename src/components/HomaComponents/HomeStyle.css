@@ -1,0 +1,50 @@
+.header-cover {
+    background-image: url('../../assets/img/5e86d0dd-c0fb-4142-88f9-acb1e1160f26.jpeg');
+    height: 100vh;
+    /* Adjust height */
+    width: 100%;
+    /* Full width */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    /* Ensure it stacks correctly */
+    padding: 10% 0 0 15% !important;
+    /* padding-left: 14%; */
+}
+
+/* Gradient overlay for header cover */
+.header-cover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    box-shadow:  0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    margin-top: 20xpx;
+}
+
+.animated-cover-text {
+    opacity: 0;
+    display: inline-block;
+    animation: fadeInCover 0.5s forwards;
+    animation-delay: calc(var(--char-index) * 0.15s);
+    /* Custom delay per character */
+}
+
+@keyframes fadeInCover {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Main restaurant section */
+
+.wave {
+    transform: rotate(180deg); /* Flips the wave */
+}

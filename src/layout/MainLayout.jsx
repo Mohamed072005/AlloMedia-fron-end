@@ -3,10 +3,10 @@ import { getLocalStorage } from "../helpers/LocalStorageHelper"
 import { useEffect } from "react";
 import NavBar from "../components/HeaderComponents/NavBar";
 
-export default function MainLayout () {
+export default function MainLayout() {
     // const authorizedUser = getLocalStorage("token");
     // const navigate = useNavigate();
-    
+
     // useEffect(() => {
     //     if(authorizedUser === null){
     //         console.log(authorizedUser);
@@ -15,9 +15,11 @@ export default function MainLayout () {
     // }, [])
     return (
         <>
-            <div className="bg-[#060818] h-screen p-3">
+            <div className="h-auto">
                 <NavBar />
-                <Outlet />
+                <main className="">
+                    <Outlet />
+                </main>
             </div>
         </>
     )

@@ -1,0 +1,16 @@
+.navbar {
+    background-color: rgba(251, 251, 251, 0.2) !important;
+    /* Slightly transparent */
+    position: fixed;
+    /* Changed from absolute to fixed */
+    width: 100%;
+    /* Full width */
+    z-index: 10;
+    /* Keep it on top of the header cover */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    /* Add subtle shadow */
+    backdrop-filter: blur(10px);
+    /* Apply blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    /* For Safari compatibility */
+}
